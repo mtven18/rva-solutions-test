@@ -29,6 +29,13 @@ abstract class AuthService
     abstract public function logout(User $user);
 
     /**
+     * Get user.
+     *
+     * @return mixed
+     */
+    abstract public function user();
+
+    /**
      * Find user.
      *
      * @param string $username

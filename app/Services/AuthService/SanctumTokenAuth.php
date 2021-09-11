@@ -29,4 +29,12 @@ class SanctumTokenAuth extends AuthService
     {
         $user->currentAccessToken()->delete();
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function user()
+    {
+        return $this->getGuard()->user();
+    }
 }

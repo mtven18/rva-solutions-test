@@ -23,7 +23,7 @@ class UserService
     /**
      * @return AuthService
      */
-    private function getAuth(): AuthService
+    public function getAuth(): AuthService
     {
         return app(AuthService::class);
     }
