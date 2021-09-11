@@ -9,7 +9,7 @@ docker run --rm \
     -u "$(id -u):$(id -g)" \
     -v $(pwd):/var/www/html \
     -w /var/www/html \
-    laravelsail/php80-composer:latest \
+    laravelsail/php74-composer:latest \
     composer install --ignore-platform-reqs
 ```
 
@@ -33,3 +33,7 @@ and initialize the project:
 sail artisan kye:generate
 sail artisan migrate
 ```
+
+## API
+
+See documentation on `http://localhost:8081/api-documentation` if you use the default host and port for application.
