@@ -1,0 +1,25 @@
+AuthUser:
+  type: object
+  readOnly: true
+  properties:
+    name:
+      type: string
+      example: nickname
+      description: Is unique
+      minimum: 6
+      maximum: 32
+    email:
+      type: string
+      example: john.doe@gmail.com
+      description: For getting email will be j******e@gmail.com. Is unique
+    balance:
+      type: number
+      format: float
+      example: 123.50
+      readOnly: true
+    password:
+      type: string
+      writeOnly: true
+      minimum: 6
+      maximum: 32
+      description: Only latin characters

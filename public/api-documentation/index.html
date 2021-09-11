@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>API Documentation</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="stylesheet" type="text/css" href="/api-documentation/swagger-ui.css" >
+    <link rel="icon" type="image/png" href="/api-documentation/favicon-32x32.png" sizes="32x32" />
+    <style>
+      html {
+        box-sizing: border-box;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+      }
+
+      *,
+      *:before,
+      *:after {
+        box-sizing: inherit;
+      }
+
+      body {
+        margin:0;
+        background: #fafafa;
+      }
+      h2 + a {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="swagger-ui"></div>
+
+    <script src="/api-documentation/swagger-ui-bundle.js"></script>
+    <script src="/api-documentation/swagger-ui-standalone-preset.js"></script>
+    <script>
+    window.onload = function () {
+      window.ui = SwaggerUIBundle({
+        url: '/api-documentation/api/api.yaml',
+        dom_id: '#swagger-ui',
+        docExpansion: 'list', // none | list | full
+        deepLinking: true,
+        presets: [SwaggerUIBundle.presets.apis],
+        plugins: [SwaggerUIBundle.plugins.DownloadUrl]
+      })
+
+      var lsKey = 'coogeki-health_swagger_auth'
+      var oldA = ui.authActions.authorize;
+      var oldL = ui.authActions.logout;
+      var token = localStorage.getItem(lsKey)
+
+      if (token) {
+        ui.authActions.authorize({
+          Bearer: {
+            name: 'bearer',
+            value: token,
+            schema: { type: 'http', in: 'header', name: 'Authorization' }
+          }
+        })
+      }
+
+      ui.authActions.authorize = function (obj) {
+        localStorage.setItem(lsKey, obj.Bearer.value)
+        return oldA(obj)
+      }
+      ui.authActions.logout = function (obj) {
+        localStorage.removeItem(lsKey)
+        return oldL(obj)
+      }
+
+      window.addEventListener('keyup', function (e) {
+        var el = document.querySelector('.close-modal')
+        if (e.keyCode !== 27 || !el) return;
+        el.click()
+      })
+    }
+  </script>
+  </body>
+</html>

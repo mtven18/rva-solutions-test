@@ -32,7 +32,7 @@ class AuthUserResource extends JsonResource
     {
         return [
             'name' => $this->name,
-            'email' => $this->email,
+            'email' => $this->security_email,
             'balance' => $this->balance,
         ];
     }

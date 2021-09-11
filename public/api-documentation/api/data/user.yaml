@@ -1,0 +1,91 @@
+/register:
+  post:
+    tags:
+      - User
+    summary: Register new user
+    requestBody:
+      content:
+        application/json:
+          schema:
+            $ref: ../api.yaml#/components/schemas/AuthUser
+    responses:
+      201:
+        description: Token
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Register successfully!
+      422:
+        $ref: ../api.yaml#/components/responses/JsonValidationError
+
+/login:
+  post:
+    tags:
+      - User
+    summary: Log in to the system
+    requestBody:
+      content:
+        application/json:
+          schema:
+            properties:
+              username:
+                type: string
+                required: true
+                example: john.doe@gmail.com
+                description: User name or email
+              password:
+                type: string
+                required: true
+                example: password
+    responses:
+      200:
+        description: Token
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                token:
+                  type: string
+      401:
+        description: Invalid credentials
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                  example: Unauthenticated
+      422:
+        $ref: ../api.yaml#/components/responses/JsonValidationError
+
+/info:
+  get:
+    tags:
+      - User
+    summary: Get auth user resource
+    security:
+      - Bearer: []
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              $ref: ../api.yaml#/components/schemas/AuthUser
+
+/logout:
+  post:
+    tags:
+      - User
+    summary: Log out from the system
+    security:
+      - Bearer: []
+    responses:
+      204:
+        description: OK

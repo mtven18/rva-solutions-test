@@ -22,5 +22,8 @@ Route::middleware(['guest'])->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-    Route::post('user/info', [UserController::class, 'me']);
+    Route::prefix('user')->group(function () {
+        Route::get('info', [UserController::class, 'me']);
+        Route::post('logout', [UserController::class, 'logout']);
+    });
 });

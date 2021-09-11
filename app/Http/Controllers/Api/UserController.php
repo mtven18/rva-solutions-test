@@ -76,4 +76,18 @@ class UserController extends Controller
             $this->service->getAuth()->user()
         );
     }
+
+    /**
+     * Logout authenticated user.
+     *
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
+    {
+        $this->service->getAuth()->logout(
+            $this->service->getAuth()->user()
+        );
+
+        return response()->json(null, JsonResponse::HTTP_NO_CONTENT);
+    }
 }
