@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('info', [UserController::class, 'me']);
         Route::post('logout', [UserController::class, 'logout']);
+
+        Route::apiResource('finance/transfer', TransactionController::class)
+            ->only(['index', 'store']);
     });
 });

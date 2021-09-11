@@ -4,6 +4,13 @@ namespace App\Http\Requests\Transaction;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/**
+ * Class StoreRequest
+ * @package App\Http\Requests\Transaction
+ *
+ * @property string $username
+ * @property string $sum
+ */
 class StoreRequest extends FormRequest
 {
     /**
