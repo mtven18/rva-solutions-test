@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -38,6 +39,7 @@ use Laravel\Sanctum\HasApiTokens;
  * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @method static Builder|User whereUsername(string $username)
  */
 class User extends Authenticatable
 {
@@ -85,5 +87,16 @@ class User extends Authenticatable
                 .str_pad('', strlen($matches[2]), '*') // change characters to '*'
                 .$matches[3]; // last char before '@'
         }, $this->email);
+    }
+
+    /**
+     * @param Builder $query
+     * @param string  $username
+     *
+     * @return Builder
+     */
+    public function scopeWhereUsername(Builder $query, string $username): Builder
+    {
+        return $query->where('name', $username)->orWhere('email', $username);
     }
 }

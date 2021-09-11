@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Services\AuthService\AuthService;
+use App\Services\AuthService\SanctumTokenAuth;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(AuthService::class, SanctumTokenAuth::class);
     }
 
     /**
