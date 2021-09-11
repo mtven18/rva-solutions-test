@@ -78,6 +78,16 @@ class User extends Authenticatable
     ];
 
     /**
+     * @param string $password
+     *
+     * @return void
+     */
+    public function setPasswordAttribute(string $password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    /**
      * @return string
      */
     public function getSecurityEmailAttribute(): string
