@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Exceptions\ForbiddenException;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -35,12 +36,18 @@ class TransactionService
      * @param float     $sum
      * @param User|null $from
      *
-     * @return Transaction|false
+     * @return Transaction
+     * @throws Exception
+     * @throws ForbiddenException
      */
-    public function send(string $username, float $sum, User $from = null)
+    public function send(string $username, float $sum, User $from = null): Transaction
     {
+        if ($sum < 0.01) {
+            throw new ForbiddenException(__('app.incorrect_transaction_sum'));
+        }
+
         if ($from->balance - $sum < 0) {
-            return false;
+            throw new ForbiddenException(__('app.balance_transaction_error'));
         }
 
         $to = User::whereUsername($username)->firstOrFail();
@@ -58,7 +65,7 @@ class TransactionService
         } catch (Exception $e) {
             DB::rollBack();
             logger()->error($e->getMessage(), $e->getTrace());
-            return false;
+            throw new Exception(__('app.unknown_error'));
         }
     }
 }
