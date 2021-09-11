@@ -7,7 +7,14 @@ use App\Services\AuthService\AuthService;
 
 class UserService
 {
-    public function register(array $data)
+    /**
+     * Register new user.
+     *
+     * @param array $data
+     *
+     * @return User
+     */
+    public function register(array $data): User
     {
         unset($data['balance']); // prohibit saving balance for a new user
         return User::query()->create($data);
