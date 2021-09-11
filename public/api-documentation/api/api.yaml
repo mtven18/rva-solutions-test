@@ -27,6 +27,16 @@ components:
                     items:
                       type: string
                       example: Attribute field_name is required.
+    JsonNotFoundError:
+      description: ''
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Not Found
 
   securitySchemes:
     Bearer:
@@ -36,6 +46,8 @@ components:
   schemas:
     AuthUser:
       $ref: schemas.yaml#/AuthUser
+    Transaction:
+      $ref: schemas.yaml#/Transaction
 
 paths:
   /user/register:
@@ -46,3 +58,5 @@ paths:
     $ref: data/user.yaml#/~1info
   /user/logout:
     $ref: data/user.yaml#/~1logout
+  /finance/transfer:
+    $ref: data/transactions.yaml#/~1finance~1transfer

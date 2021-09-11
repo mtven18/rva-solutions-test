@@ -1,6 +1,5 @@
 AuthUser:
   type: object
-  readOnly: true
   properties:
     name:
       type: string
@@ -23,3 +22,21 @@ AuthUser:
       minimum: 6
       maximum: 32
       description: Only latin characters
+
+Transaction:
+  type: object
+  readOnly: true
+  properties:
+    id:
+      type: string
+    sum:
+      type: number
+      format: float
+      example: 123.50
+    from:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string

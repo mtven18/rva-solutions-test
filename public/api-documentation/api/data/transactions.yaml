@@ -1,0 +1,60 @@
+/finance/transfer:
+  get:
+    tags:
+      - Transactions
+    summary: Get auth user transactions list
+    security:
+      - Bearer: []
+    parameters:
+      - in: query
+        name: page
+        type: integer
+        nullable: true
+    responses:
+      200:
+        description: OK
+        content:
+          application/json:
+            schema:
+              type: objet
+              properties:
+                data:
+                  $ref: ../api.yaml#/components/schemas/Transaction
+  post:
+    tags:
+      - Transactions
+    summary: Make new transaction
+    security:
+      - Bearer: []
+    requestBody:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              name:
+                type: string
+              sum:
+                type: number
+                format: float
+    responses:
+      201:
+        descrption: Created
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+      403:
+        descrption: Forbidden
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+      404:
+        $ref: ../api.yaml#/components/responses/JsonNotFoundError
