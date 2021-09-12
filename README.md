@@ -45,3 +45,11 @@ Up user balance:
 ```shell
 sail artisan balance:up {nickname or email} {amount}
 ```
+
+## Testing
+
+Run:
+
+```shell
+sail test
+```
