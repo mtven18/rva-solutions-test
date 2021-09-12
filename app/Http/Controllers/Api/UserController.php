@@ -8,7 +8,6 @@ use App\Http\Requests\User\RegisterRequest;
 use App\Http\Resources\User\AuthUserResource;
 use App\Services\UserService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {

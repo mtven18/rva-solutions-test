@@ -2,13 +2,13 @@
 
 namespace App\Services;
 
+use \Exception;
 use App\Exceptions\ForbiddenException;
 use App\Models\Transaction;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
-use \Exception;
 
 class TransactionService
 {

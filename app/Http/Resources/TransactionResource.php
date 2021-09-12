@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use App\Http\Resources\User\AuthUserResource;
 use App\Http\Resources\User\TransactionUserResource;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
