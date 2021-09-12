@@ -58,7 +58,7 @@ class UserController extends Controller
         if ($result === false) {
             return response()->json([
                 'message' => __('app.unauthenticated')
-            ]);
+            ], JsonResponse::HTTP_UNAUTHORIZED);
         }
 
         return response()->json($result);

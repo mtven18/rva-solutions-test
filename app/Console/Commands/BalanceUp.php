@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Exceptions\ForbiddenException;
 use App\Services\TransactionService;
 use Illuminate\Console\Command;
+use \Exception;
 
 class BalanceUp extends Command
 {
@@ -42,17 +43,20 @@ class BalanceUp extends Command
      * Execute the console command.
      *
      * @return int
-     * @throws ForbiddenException
      */
     public function handle(): int
     {
-        $this->service->send(
-            $this->argument('username'),
-            (float) $this->argument('amount')
-        );
+        try {
+            $this->service->send(
+                $this->argument('username'),
+                (float) $this->argument('amount')
+            );
 
-        $this->info(__('app.transaction_sent'));
-
-        return 0;
+            $this->info(__('app.transaction_sent'));
+            return 0;
+        } catch (Exception $e) {
+            $this->error($e->getMessage());
+            return 1;
+        }
     }
 }
