@@ -37,3 +37,11 @@ sail artisan migrate
 ## API
 
 See documentation on `http://localhost:8081/api-documentation` if you use the default host and port for application.
+
+## Commands
+
+Up user balance:
+
+```shell
+sail artisan balance:up {nickname or email} {amount}
+```
