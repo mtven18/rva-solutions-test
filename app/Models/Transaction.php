@@ -51,7 +51,7 @@ class Transaction extends Model
      * @var array
      */
     protected $casts = [
-        'balance' => 'float',
+        'sum' => 'float',
     ];
 
     /**

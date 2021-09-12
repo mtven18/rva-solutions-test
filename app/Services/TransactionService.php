@@ -46,7 +46,7 @@ class TransactionService
             throw new ForbiddenException(__('app.incorrect_transaction_sum'));
         }
 
-        if ($from->balance - $sum < 0) {
+        if ($from && $from->balance - $sum < 0) {
             throw new ForbiddenException(__('app.balance_transaction_error'));
         }
 
